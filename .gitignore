@@ -1,0 +1,6 @@
+.vscode
+.DS_Store
+__pycache__
+lab/*/tests
+hw/*/tests
+index.py
