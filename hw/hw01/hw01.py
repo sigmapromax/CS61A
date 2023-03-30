@@ -167,7 +167,7 @@ def hailstone(n):
 
 
 "*** YOUR CODE HERE ***"
-quine = 'print("quine = \" + repr(quine) + "; eval(quine)")'; eval(quine)
+quine = "print('quine = \' + repr(quine) + \'; eval(quine)\')"; eval(quine)
 
 def quine_test():
     """
