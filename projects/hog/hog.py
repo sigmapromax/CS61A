@@ -373,7 +373,7 @@ def final_strategy(score, opponent_score):
     *** YOUR DESCRIPTION HERE ***
     """
     # BEGIN PROBLEM 12
-    
+    return picky_piggy_strategy(score, opponent_score) 
     # END PROBLEM 12
 
 ##########################
