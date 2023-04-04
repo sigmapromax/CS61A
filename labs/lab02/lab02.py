@@ -54,13 +54,16 @@ def count_cond(condition):
     >>> count_primes(20)   # 2, 3, 5, 7, 11, 13, 17, 19
     8
     """
-    def f(n): 
+
+    def f(n):
         count = 0
-        for i in range(1, n+1):
+        for i in range(1, n + 1):
             if condition(n, i):
                 count = count + 1
         return count
-    return f 
+
+    return f
+
 
 def composer(f, g):
     """Return the composition function which given x, computes f(g(x)).
@@ -94,7 +97,11 @@ def composite_identity(f, g):
     >>> b1(4)                            # (4 + 1)^2 != 4^2 + 1
     False
     """
-    "*** YOUR CODE HERE ***"
+
+    def run(x):
+        return composer(f, g)(x) == composer(g, f)(x)
+
+    return run
 
 
 def cycle(f1, f2, f3):
@@ -123,4 +130,31 @@ def cycle(f1, f2, f3):
     >>> do_two_cycles(1)
     19
     """
-    "*** YOUR CODE HERE ***"
+
+    def nest_func(f, x):
+        return f(x)
+
+    def run(n, x):
+        for i in range(1, n + 1, 1):
+            # 1 2 3
+            # 4 5 6
+            # 7 8 9
+            sign = i % 3
+            if sign == 1:
+                x = nest_func(f1, x)
+                continue
+            elif sign == 2:
+                x = nest_func(f2, x)
+                continue
+            elif sign == 0:
+                x = nest_func(f3, x)
+                continue
+        return x
+                
+    def check(n):
+        if n == 0:
+            return lambda x: x
+        else:
+            return lambda x: run(n, x)
+
+    return check
