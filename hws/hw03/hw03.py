@@ -209,7 +209,16 @@ def move_stack(n, start, end):
     Move the top disk from rod 1 to rod 3
     """
     assert 1 <= start <= 3 and 1 <= end <= 3 and start != end, "Bad start/end"
-    "*** YOUR CODE HERE ***"
+
+    def destination(n1, n2):
+        return 6 - n1 - n2
+
+    if n == 1:
+        print_move(start, end)
+    else:
+        move_stack(n-1, start, destination(start, end))
+        print_move(start, end)
+        move_stack(n-1, destination(start, end), end)
 
 
 from operator import sub, mul
@@ -226,4 +235,5 @@ def make_anonymous_factorial():
     ...     ['Assign', 'AnnAssign', 'AugAssign', 'NamedExpr', 'FunctionDef', 'Recursion'])
     True
     """
-    return 'YOUR_EXPRESSION_HERE'
+    # return 'YOUR_EXPRESSION_HERE'
+    return lambda n : (lambda x, function : 1 if x == 1 else x * function(x - 1, function))(n, lambda x, function : 1 if x == 1 else x * function(x - 1, function))
