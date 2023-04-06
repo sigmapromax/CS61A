@@ -123,7 +123,16 @@ def make_repeater(func, n):
     >>> make_repeater(square, 0)(5) # Yes, it makes sense to apply the function zero times!
     5
     """
-    "*** YOUR CODE HERE ***"
+    def run(x):
+        identity = lambda x: x
+        if n == 0:
+            return identity(x)
+        else:
+            res = composer(func, identity)(x)
+            for _ in range(n - 1):
+                res = composer(func, identity)(res)
+        return res
+    return run
 
 
 def composer(func1, func2):
@@ -141,7 +150,9 @@ def apply_twice(func):
     >>> apply_twice(square)(2)
     16
     """
-    "*** YOUR CODE HERE ***"
+    def run(x):
+        return func(func(x))
+    return run
 
 
 def protected_secret(password, secret, num_attempts):
@@ -163,5 +174,14 @@ def protected_secret(password, secret, num_attempts):
     SECRET LOCKED
     """
     def get_secret(password_attempt):
-        "*** YOUR CODE HERE ***"
+        nonlocal num_attempts
+        if num_attempts == 0:
+            print('SECRET LOCKED')
+        else:
+            if password == password_attempt:
+                print(secret)
+            else:
+                num_attempts = num_attempts - 1
+                print('INCORRECT PASSWORD')
+        return protected_secret(password, secret, num_attempts)
     return get_secret
